@@ -126,3 +126,31 @@ int pesoArbin( Arbin* a){
     }
 }
 
+/**
+ * @brief Calcula e retorna numero de folhas da arvore
+ * @params Arbin
+ * @return int
+**/
+int numFolhas(Arbin* a){
+    if(vaziaArbin(a))
+        return 0;
+    else if(vaziaArbin(esqArbin(a)) && vaziaArbin(dirArbin(a)))
+        return 1;
+    else return numFolhas(esqArbin(a)) + numFolhas(dirArbin(a));
+
+}
+
+/**
+ * @brief Calcula e retorna numero de vezes que um elemento aparece na arvore
+ * @params Arbin
+ * @return int
+**/
+int numOcorrencias(Arbin* a, elem){
+    if(vaziaArbin(a))
+        return 0;
+    else if(raizArbin(a) == elem)
+        return 1 + numOcorrencias(esqArbin(a),elem) + numOcorrencias(dirArbin(a),elem);
+    else
+        return numOcorrencias(esqArbin(a),elem) + numOcorrencias(dirArbin(a),elem);
+}
+
