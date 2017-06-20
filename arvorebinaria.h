@@ -30,7 +30,7 @@ int estaArbin(Arbin* a, tipoInfo info);
 void imprimeArbin(Arbin* a);
 int pesoArbin(Arbin* a);
 int numFolhas(Arbin* a);
-int numOcorrencias(Arbin* a, elem);
+int numOcorrencias(Arbin* a, tipoInfo elem);
 
 
 

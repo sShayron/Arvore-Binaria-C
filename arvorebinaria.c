@@ -145,7 +145,7 @@ int numFolhas(Arbin* a){
  * @params Arbin
  * @return int
 **/
-int numOcorrencias(Arbin* a, elem){
+int numOcorrencias(Arbin* a, tipoInfo elem){
     if(vaziaArbin(a))
         return 0;
     else if(raizArbin(a) == elem)
