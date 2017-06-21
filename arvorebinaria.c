@@ -217,7 +217,7 @@ int vaziaArbinBusca(ArbinBusca* a)
 
 /**     2.1)
  * @brief Verifica a ocorrencia de uma info na arvore de busca
- * @params Arbin, tipoInfo
+ * @params ArbinBusca, tipoInfo
  * @return  1 - se encontrar
             0 - se nao encontrar
 **/
@@ -234,5 +234,68 @@ int estaArbinBusca(ArbinBusca* a, tipoInfo info)
 			else
 				return 1;
 }
+
+/**     2.2)
+ * @brief Insere um elemento na arvore de busca
+ * @params ArbinBusca, tipoInfo
+ * @return  AbinBusca
+**/
+ArbinBusca* insArbinBusca(ArbinBusca* a, tipoInfo info)
+{
+    if(vaziaArbinBusca(a)) {
+        a = (ArbinBusca*)malloc(sizeof(ArbinBusca));
+        a->info = info;
+        a->esq = a->dir = NULL;
+    }
+    else if (info < raizArbinBusca(a))
+        a->esq = insArbinBusca(esqArbinBusca(a), info);
+    else
+        a->dir = insArbinBusca(dirArbinBusca(a), info);
+    return a;
+}
+
+/**     2.3)
+ * @brief Elimina um elemento na arvore de busca
+ * @params ArbinBusca, tipoInfo
+ * @return  AbinBusca
+**/
+ArbinBusca* elimArbinBusca(ArbinBusca* a, tipoInfo info)
+{
+    if(vaziaArbinBusca(a))
+        return NULL;
+    else if (raizArbinBusca(a) > info)
+            a->esq = elimArbinBusca(esqArbinBusca(a), info);
+    else if (raizArbinBusca(a) < info)
+            a->dir = elimArbinBusca(dirArbinBusca(a), info);
+    else {
+        if(a->esq == NULL && a->dir == NULL) {
+            free(a);
+            a = NULL;
+        }
+        else if(a->esq == NULL) {
+            ArbinBusca* temp = a;
+            a = a->dir;
+            free(temp);
+        }
+        else if(a->dir == NULL) {
+            ArbinBusca* temp = a;
+            a = a->esq;
+            free(temp);
+        }
+        else {
+            ArbinBusca* pai = a;
+            ArbinBusca* filho = a->esq;
+            while(filho->dir != NULL) {
+                pai = filho;
+                filho = filho->dir;
+            }
+            a->info = filho->info;
+            filho->info = info;
+            a->esq = elimArbinBusca(esqArbinBusca(a), info);
+        }
+    }
+    return a;
+}
+
 
 

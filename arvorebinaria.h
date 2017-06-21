@@ -42,7 +42,9 @@ ArbinBusca* criaArbinBuscaVazia();
 ArbinBusca* esqArbinBusca(ArbinBusca* a);
 ArbinBusca* dirArbinBusca(ArbinBusca* a);
 int vaziaArbinBusca(ArbinBusca* a);
-int estaArbinBusca(ArbinBusca* a, tipoInfo info) ;
+int estaArbinBusca(ArbinBusca* a, tipoInfo info);
+ArbinBusca* insArbinBusca(ArbinBusca* a, tipoInfo info);
+ArbinBusca* elimArbinBusca(ArbinBusca* a, tipoInfo info);
 
 
 
