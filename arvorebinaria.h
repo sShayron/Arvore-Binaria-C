@@ -4,22 +4,27 @@
 /**
  * Tipo da informação da arvore
 **/
-typedef char tipoInfo;
+typedef int tipoInfo;
 
 /**
  * Estrutura da arvore binaria
- * Info do tipo char
+ * Info do tipo int
  * Ponteiros para as sub-árvores à esquerda, e à direita
 **/
-struct arbin {
+typedef struct arbin {
     tipoInfo info;
     struct arbin* esq;
     struct arbin* dir;
-};
+} Arbin;
 
-typedef struct arbin Arbin;
+typedef struct arbinbusca {
+    tipoInfo info;
+    struct arbinbusca* esq;
+    struct arbinbusca* dir;
+} ArbinBusca;
 
-void criaArbinVazia();
+// Functions Arbin
+Arbin* criaArbinVazia();
 Arbin* criaArbin(tipoInfo info, Arbin* sae, Arbin* sad);
 Arbin* liberaArbin(Arbin* a);
 tipoInfo raizArbin(Arbin* a);
@@ -31,6 +36,15 @@ void imprimeArbin(Arbin* a);
 int pesoArbin(Arbin* a);
 int numFolhas(Arbin* a);
 int numOcorrencias(Arbin* a, tipoInfo elem);
+
+// Functions ArbinBusca
+ArbinBusca* criaArbinBuscaVazia();
+ArbinBusca* esqArbinBusca(ArbinBusca* a);
+ArbinBusca* dirArbinBusca(ArbinBusca* a);
+int vaziaArbinBusca(ArbinBusca* a);
+int estaArbinBusca(ArbinBusca* a, tipoInfo info) ;
+
+
 
 
 

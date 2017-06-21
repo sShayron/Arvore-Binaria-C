@@ -5,12 +5,16 @@
  * sad = sub-arvore da direita
 **/
 
+/****************************************/
+/********** Functions Arbin ************/
+/**************************************/
+
 /**
  * @brief Cria uma árvore vazia
  * @params
  * @return NULL
 **/
-void criaArbinVazia()
+Arbin* criaArbinVazia()
 {
     return NULL;
 }
@@ -77,17 +81,19 @@ Arbin* dirArbin(Arbin* a)
 /**
  * @brief Indica se a arvore esta vazia
  * @params Arbin
- * @return true/false
+ * @return 1 - se vazia
+           0 - se não vazia
 **/
 int vaziaArbin(Arbin* a)
 {
     return a==NULL;
 }
 
-/**
+/**     2)
  * @brief Verifica a ocorrencia de uma info na arvore
  * @params Arbin, tipoInfo
- * @return true/false
+ * @return  1 - se encontrar
+            0 - se nao encontrar
 **/
 int estaArbin(Arbin* a, tipoInfo info)
 {
@@ -113,7 +119,7 @@ void imprimeArbin(Arbin* a)
     }
 }
 
-/**
+/**     1)
  * @brief Calcula e retorna peso da arvore (número de elementos da árvore)
  * @params Arbin
  * @return int
@@ -126,7 +132,7 @@ int pesoArbin( Arbin* a){
     }
 }
 
-/**
+/**     3)
  * @brief Calcula e retorna numero de folhas da arvore
  * @params Arbin
  * @return int
@@ -140,7 +146,7 @@ int numFolhas(Arbin* a){
 
 }
 
-/**
+/**     4)
  * @brief Calcula e retorna numero de vezes que um elemento aparece na arvore
  * @params Arbin
  * @return int
@@ -153,4 +159,80 @@ int numOcorrencias(Arbin* a, tipoInfo elem){
     else
         return numOcorrencias(esqArbin(a),elem) + numOcorrencias(dirArbin(a),elem);
 }
+
+/*********************************************/
+/********** Functions ArbinBusca ************/
+/*******************************************/
+
+/**
+ * @brief Cria uma árvore de busca vazia
+ * @params
+ * @return NULL
+**/
+ArbinBusca* criaArbinBuscaVazia()
+{
+    return NULL;
+}
+
+/**
+ * @brief Retorna raiz da arvore de busca
+ * @params ArbinBusca
+ * @return tipoInfo
+**/
+tipoInfo raizArbinBusca(ArbinBusca* a)
+{
+    return a->info;
+}
+
+/**
+ * @brief Retorna sub arvore de busca da esquerda
+ * @params ArbinBusca
+ * @return ArbinBusca
+**/
+ArbinBusca* esqArbinBusca(ArbinBusca* a)
+{
+    return a->esq;
+}
+
+/**
+ * @brief Retorna sub arvore de busca da direita
+ * @params ArbinBusca
+ * @return ArbinBusca
+**/
+ArbinBusca* dirArbinBusca(ArbinBusca* a)
+{
+    return a->dir;
+}
+
+/**
+ * @brief Indica se a arvore de busca esta vazia
+ * @params ArbinBusca
+ * @return  1 - se vazia
+            0 - se nao vazia
+**/
+int vaziaArbinBusca(ArbinBusca* a)
+{
+    return a==NULL;
+}
+
+/**     2.1)
+ * @brief Verifica a ocorrencia de uma info na arvore de busca
+ * @params Arbin, tipoInfo
+ * @return  1 - se encontrar
+            0 - se nao encontrar
+**/
+int estaArbinBusca(ArbinBusca* a, tipoInfo info)
+{
+	if (vaziaArbinBusca(a))
+		return 0;
+	else
+		if (raizArbinBusca(a) > info)
+			return estaArbinBusca(esqArbinBusca(a), info);
+		else
+			if (raizArbinBusca(a) < info)
+				return estaArbinBusca(dirArbinBusca(a), info);
+			else
+				return 1;
+}
+
 
