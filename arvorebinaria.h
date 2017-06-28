@@ -26,6 +26,7 @@ typedef struct arbinbusca {
 // Functions Arbin
 Arbin* criaArbinVazia();
 Arbin* criaArbin(tipoInfo info, Arbin* sae, Arbin* sad);
+Arbin* insArbin(Arbin* a, tipoInfo info);
 Arbin* liberaArbin(Arbin* a);
 tipoInfo raizArbin(Arbin* a);
 Arbin* esqArbin(Arbin* a);
@@ -36,6 +37,7 @@ void imprimeArbin(Arbin* a);
 int pesoArbin(Arbin* a);
 int numFolhas(Arbin* a);
 int numOcorrencias(Arbin* a, tipoInfo elem);
+int existeCaminho(Arbin* a, tipoInfo elemA, tipoInfo elemB);
 
 // Functions ArbinBusca
 ArbinBusca* criaArbinBuscaVazia();

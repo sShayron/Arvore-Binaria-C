@@ -26,11 +26,32 @@ Arbin* criaArbinVazia()
 **/
 Arbin* criaArbin(tipoInfo info, Arbin* sae, Arbin* sad)
 {
-    Arbin* p  = (Arbin*)malloc(sizeof(Arbin));
-    p->info = info;
-    p-> esq = sae;
-    p-> dir  = sad;
-    return p;
+    Arbin* a  = (Arbin*)malloc(sizeof(Arbin));
+    a->info = info;
+    a-> esq = sae;
+    a-> dir  = sad;
+    return a;
+}
+
+/**
+ * @brief Insere um nó na arvore
+ * @parms tipoInfo, Arbin esq, Arbin dir
+ * @return Arbin
+**/
+Arbin* insArbin(Arbin* a, tipoInfo info)
+{
+    printf("\nInserindo...\n");
+    if(vaziaArbin(a)) {
+        a = criaArbin(info, NULL, NULL);
+    }
+    else if (vaziaArbin(esqArbin(a)))
+        a = insArbin(esqArbin(a), info);
+    else if ((vaziaArbin(dirArbin(a))))
+        a = insArbin(dirArbin(a), info);
+    else
+        printf("WTF I DO");
+
+    return a;
 }
 
 /**
@@ -98,11 +119,11 @@ int vaziaArbin(Arbin* a)
 int estaArbin(Arbin* a, tipoInfo info)
 {
     if(vaziaArbin(a))
-        return 0; // Não encontrou
+        return 0;
     else
-            return raizArbin(a)==info ||
+            return (raizArbin(a)==info ||
                 estaArbin(esqArbin(a), info) ||
-                estaArbin(dirArbin(a), info);
+                estaArbin(dirArbin(a), info));
 }
 
 /**
@@ -112,10 +133,13 @@ int estaArbin(Arbin* a, tipoInfo info)
 **/
 void imprimeArbin(Arbin* a)
 {
+    printf("\n\n...Imprimindo Arvore Binaria...\n\n");
     if(!vaziaArbin(a)){
         printf("%i", raizArbin(a));
         imprimeArbin(esqArbin(a));
         imprimeArbin(dirArbin(a));
+    } else {
+        printf("Arvore vazia\n\n");
     }
 }
 
@@ -158,6 +182,28 @@ int numOcorrencias(Arbin* a, tipoInfo elem){
         return 1 + numOcorrencias(esqArbin(a),elem) + numOcorrencias(dirArbin(a),elem);
     else
         return numOcorrencias(esqArbin(a),elem) + numOcorrencias(dirArbin(a),elem);
+}
+
+/**     5)
+ * @brief Verifica se existe caminho entre 2 elementos na arvore
+ * @params Arbin, tipoInfo, tipoInfo
+ * @return int
+**/
+int existeCaminho(Arbin* a, tipoInfo elemA, tipoInfo elemB) {
+    Arbin *aux;
+    if (vaziaArbin(a) || !(estaArbin(a, elemA), estaArbin(a, elemB))) {
+        return 0;
+    } else {
+        if(raizArbin(a) == elemA) {
+            aux = a;
+            if(estaArbin(aux, elemB))
+                return 1;
+        } else {
+            existeCaminho(esqArbin(a), elemA, elemB);
+            existeCaminho(dirArbin(a), elemA, elemB);
+        }
+    }
+    return 0;
 }
 
 /*********************************************/
